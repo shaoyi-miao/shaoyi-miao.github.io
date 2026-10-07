@@ -1,0 +1,32 @@
+name: P025 v4 source repair
+
+on:
+  push:
+    branches:
+      - p025-v4-source-repair-20261007
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pandas requests beautifulsoup4 lxml
+      - name: Run population-wide SEC cover replay
+        run: python _tmp/p025/source_repair.py
+      - name: Upload result artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p025-v4-source-repair
+          path: p025_v4_output/
+          if-no-files-found: warn
+          retention-days: 7
