@@ -39,3 +39,36 @@
 .editorial-blurb>span{display:block;font-size:11px;font-weight:550;letter-spacing:.06em;color:#647467;margin-bottom:7px}
 .detail-copy .editorial-blurb p{font-size:15px;line-height:2.05;margin:0;color:#45443c}
 @media(max-width:650px){.editorial-blurb{padding:15px 16px}.detail-copy .editorial-blurb p{font-size:14px;line-height:1.95}}
+
+/* Reading, genuine GitHub-backed discussion and provider-ready visit counters. */
+.home-stat-line{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin:10px 0 38px;padding:12px 2px 18px;border-bottom:1px solid #dfd5c7}
+.home-stat-line>div{display:flex;gap:11px;align-items:baseline;color:#605c53;font-size:12px}
+.home-stat-line strong{font-size:20px;font-weight:550;font-variant-numeric:tabular-nums;color:#4d5b4c}
+.home-stat-line>small{font-size:11px;color:#78736a;margin-left:auto}
+.reader-utilities{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:15px 0 12px;padding:12px 16px;background:#f9f5ec;border:1px solid #e2dacd;border-radius:16px;color:#595b53;font-size:12px}
+.reader-release{color:#657764;font-weight:550}
+.reader-release span{font-size:8px;margin-right:4px;vertical-align:2px}
+.reading-views{color:#78766c}
+.share-reading{border:0;background:transparent;color:#536b57;margin-left:auto;padding:5px 2px;cursor:pointer;font:inherit}
+.share-reading:hover,.share-reading:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.reader-next-trials{display:flex;justify-content:space-between;gap:16px;margin:16px 2px 8px;font-size:12px;color:#576f5c}
+.reader-next-trials a:hover{text-decoration:underline}
+.reader-comments{max-width:1050px;margin:36px auto 88px;background:#fcf9f2;border:1px solid #e2d9cc;border-radius:30px;padding:32px 34px 37px;box-shadow:0 12px 36px rgba(69,56,38,.035)}
+.reader-comments-head h2{font-size:25px;line-height:1.45;margin:8px 0 7px;font-weight:550}
+.reader-comments-head p{font-size:13px;line-height:1.85;color:#676257;margin:4px 0}
+.comments-messages{margin:20px 0}
+.comments-status{color:#7a746a;font-size:13px;padding:23px 18px;background:#f7f2e9;border:1px solid #e9e0d4;border-radius:15px}
+.comment-card{border-bottom:1px solid #e7e0d5;padding:17px 3px 20px}
+.comment-head{display:flex;gap:12px;align-items:center;justify-content:space-between;color:#5a705b;font-size:13px}
+.comment-head a{color:#596b5d;font-weight:600}
+.comment-head time{font-size:11px;color:#777169}
+.comment-body{font-size:14px;line-height:1.85;color:#444139;white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0 1px}
+.comments-notice{font-size:12px;color:#746d62;margin:16px 0 0;line-height:1.7}
+.guestbook{padding:60px 0 90px}
+.guestbook h1{font-size:clamp(30px,4vw,46px);font-weight:600;margin:13px 0 9px}
+.guestbook-intro{font-size:15px;line-height:2;color:#5e5a51;max-width:730px;margin:0 0 34px}
+.guestbook .reader-comments{margin:0 0 22px;max-width:100%}
+.guestbook-follow{display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:#576b56;padding:14px 1px}
+@media(max-width:800px){.reader-comments{margin:24px 17px 60px;padding:22px;border-radius:23px}.home-stat-line>small{flex-basis:100%;margin-left:0}}
+@media(max-width:650px){.home-stat-line{gap:12px 22px}.reader-utilities{gap:8px;justify-content:space-between}.share-reading{margin-left:0}.reader-comments{margin:20px 12px 50px;padding:20px 16px}.reader-comments-head h2{font-size:21px}.reader-next-trials{font-size:11px}.guestbook{padding:36px 0 60px}}
+.reading-free-mark{display:inline-block;font-size:10px;font-weight:600;color:#58735f;background:#e7efe6;border:1px solid #c6d6c4;padding:2px 7px;border-radius:8px;margin-left:10px;vertical-align:2px}
