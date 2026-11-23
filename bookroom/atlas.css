@@ -33,3 +33,9 @@
 .search-scope-note{font-size:12px;color:#68645c;margin:23px 0 54px;line-height:1.9;max-width:770px}
 @media(max-width:650px){.search-suggestions{gap:7px}.search-suggestions>span{width:100%;margin-bottom:4px}.search-topic-chip{padding:7px 11px}}
 
+
+/* Book-specific editorial introductions; authored from reviewed manuscripts, not excerpts. */
+.editorial-blurb{margin:20px 0 2px;padding:19px 23px;background:#f8f3e9;border-left:3px solid #8f9d8c;border-radius:0 18px 18px 0}
+.editorial-blurb>span{display:block;font-size:11px;font-weight:550;letter-spacing:.06em;color:#647467;margin-bottom:7px}
+.detail-copy .editorial-blurb p{font-size:15px;line-height:2.05;margin:0;color:#45443c}
+@media(max-width:650px){.editorial-blurb{padding:15px 16px}.detail-copy .editorial-blurb p{font-size:14px;line-height:1.95}}
