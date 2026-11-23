@@ -1,45 +1,45 @@
 (()=>{"use strict";
-const repo="shaoyi-miao/shaoyi-miao.github.io";
-const locations=[...document.querySelectorAll("[data-comments-issue]")];
-for(const node of locations){
- const id=Number(node.dataset.commentsIssue);
- const list=node.querySelector("[data-comments-list]");
- if(!Number.isSafeInteger(id)||id<=0||!list)continue;
- const endpoint="https://api.github.com/repos/"+repo+"/issues/"+id+"/comments?per_page=30";
- const fallback="https://github.com/"+repo+"/issues/"+id;
- const status=(s)=>{list.replaceChildren();const p=document.createElement("p");p.className="comments-status";p.textContent=s;list.append(p)};
- const text=(t,className)=>{let x=document.createElement("span");x.className=className;x.textContent=t;return x};
- const safeUser=(u)=>/^[A-Za-z0-9-]{1,39}$/.test(u||"")?u:"GitHub 读者";
- const fetchComments=async()=>{
-   try{
-     const ctl=new AbortController();
-     const abort=setTimeout(()=>ctl.abort(),10000);
-     let r;
-     try {r=await fetch(endpoint,{headers:{"Accept":"application/vnd.github+json"},signal:ctl.signal});}
-     finally{clearTimeout(abort);}
-     if(!r.ok)throw Error("HTTP "+r.status);
-     const comments=await r.json();
-     if(!Array.isArray(comments))throw Error("Malformed response");
-     list.replaceChildren();
-     if(!comments.length){status("目前还没有留言，欢迎成为第一个讨论这篇作品的读者。");return;}
-     for(const c of comments.slice(0,30)){
-       if(!c||typeof c.body!=="string")continue;
-       const article=document.createElement("article");article.className="comment-card";
-       const head=document.createElement("div");head.className="comment-head";
-       const user=safeUser(c.user&&c.user.login);
-       const author=document.createElement("a");author.href="https://github.com/"+encodeURIComponent(user);author.rel="noopener noreferrer";author.target="_blank";author.textContent=user;
-       const when=document.createElement("time");
-       when.dateTime=c.created_at||"";
-       const date=new Date(c.created_at);
-       when.textContent=isNaN(date.getTime())?"":new Intl.DateTimeFormat("zh-CN",{year:"numeric",month:"short",day:"numeric"}).format(date);
-       head.append(author,when);
-       const body=document.createElement("p");body.className="comment-body";body.textContent=c.body;article.append(head,body);list.append(article);
-     }
-     if(comments.length===30){
-       const l=document.createElement("a");l.href=fallback;l.target="_blank";l.rel="noopener noreferrer";l.textContent="查看更多留言 ↗";list.append(l);
-     }
-   }catch(e){status("暂时无法载入留言。你仍可通过下方链接在 GitHub 查看及发表。");}
- };
- fetchComments();
+const cfg=window.__BOOKROOM_BACKEND__;if(!cfg)return;
+async function call(payload){
+ const r=await fetch(cfg.endpoint,{method:"POST",headers:{"Content-Type":"application/json","apikey":cfg.key},body:JSON.stringify(payload),cache:"no-store"});
+ let data;try{data=await r.json()}catch{throw Error("unavailable")}
+ if(!r.ok)throw Error(r.status===429?"rate":"unavailable");
+ return data;
+}
+for(const node of document.querySelectorAll("[data-comments-topic]")){
+ const topic=node.dataset.commentsTopic,list=node.querySelector("[data-comments-list]"),form=node.querySelector("form"),msg=node.querySelector("[data-comment-status]");
+ if(!list||!form||!msg)continue;
+ function status(s){list.replaceChildren();const p=document.createElement("p");p.className="comments-status";p.textContent=s;list.append(p)}
+ async function load(){
+  try{
+   const data=await call({action:"comments",topic});if(!Array.isArray(data))throw Error("invalid");
+   if(!data.length){status("暂无留言");return;}
+   list.replaceChildren();
+   for(const c of data.slice(0,100)){
+    if(typeof c.body!=="string")continue;
+    const article=document.createElement("article");article.className="comment-card";
+    const head=document.createElement("div");head.className="comment-head";
+    const author=document.createElement("strong");author.textContent=c.display_name||"匿名读者";
+    const time=document.createElement("time");const dt=new Date(c.created_at);
+    if(!isNaN(dt.getTime())){time.dateTime=dt.toISOString();time.textContent=dt.toLocaleDateString("zh-CN")}
+    const body=document.createElement("p");body.className="comment-body";body.textContent=c.body;
+    head.append(author,time);article.append(head,body);list.append(article);
+   }
+  }catch{status("暂时无法加载留言")}
+ }
+ form.addEventListener("submit",async e=>{
+  e.preventDefault();if(form.dataset.busy==="1")return;
+  const fields=new FormData(form),body=String(fields.get("body")||"").trim();
+  if(!body||body.length>1500){msg.textContent="请输入1–1500字留言。";return;}
+  const button=form.querySelector("button[type=submit]");
+  form.dataset.busy="1";button.disabled=true;msg.textContent="正在提交…";
+  try{
+   const data=await call({action:"submit",topic,name:String(fields.get("name")||"").trim(),body,website:String(fields.get("website")||"")});
+   if(data.status!=="pending")throw Error("unavailable");
+   form.reset();msg.textContent="留言已提交，审核后显示。";
+  }catch(e){msg.textContent=e.message==="rate"?"留言过于频繁，请稍后再试。":"提交失败，请稍后重试。";}
+  finally{form.dataset.busy="0";button.disabled=false;}
+ });
+ load();
 }
 })();

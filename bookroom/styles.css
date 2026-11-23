@@ -33,3 +33,12 @@ h1,h2,h3{font-family:var(--ui)}h1{font-size:clamp(30px,3.5vw,46px);line-height:1
 @media(max-width:650px){.mobile-menu{display:block}.header-search{padding:7px 10px}.mobile-categories{display:grid;margin-top:12px}.map-surface{display:none}.intro{padding-top:34px}.intro .aside-note{font-size:14px}.route-grid,.search-results{grid-template-columns:1fr}.topic-orb{width:105px;height:105px}.topic-orb span{font-size:17px}.topic-orb small{font-size:11px}.route-header h1{font-size:29px}.path-sequence li{padding:15px;gap:10px}.path-sequence li h2{font-size:17px}.reader-page,.paper{min-height:430px}}
 /* Published homepage typography and breathing-room correction (2026-11-24) */
 @media (max-width:650px){.logo{gap:9px;font-size:14px}.logo-mark{width:30px;height:30px;flex-basis:30px}.section-block{margin-bottom:34px}.mobile-categories{margin-bottom:14px}.way-row{padding-bottom:42px}}
+
+.bookroom-comment-form{display:grid;gap:12px;margin:20px 0 8px;text-align:left}
+.bookroom-comment-form label{display:grid;gap:6px;font-size:14px;font-weight:600}
+.bookroom-comment-form input:not([name=website]),.bookroom-comment-form textarea{box-sizing:border-box;width:100%;min-width:0;padding:11px 12px;border:1px solid var(--line,#d1c8bb);border-radius:9px;background:transparent;color:inherit;font:inherit;font-weight:400}
+.bookroom-comment-form textarea{resize:vertical;min-height:100px}
+.bookroom-comment-form .comment-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.bookroom-comment-form button:disabled{opacity:.6;cursor:wait}
+.bookroom-comment-form [data-comment-status]{font-size:13px}
+.comment-body{white-space:pre-wrap;overflow-wrap:anywhere}
