@@ -42,3 +42,6 @@ h1,h2,h3{font-family:var(--ui)}h1{font-size:clamp(30px,3.5vw,46px);line-height:1
 .bookroom-comment-form button:disabled{opacity:.6;cursor:wait}
 .bookroom-comment-form [data-comment-status]{font-size:13px}
 .comment-body{white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* bookroom-brand-fit */
+@media(max-width:420px){.head .header-search{display:none}.head .logo{font-size:14px;gap:8px}.head .mobile-menu{flex-shrink:0}}
