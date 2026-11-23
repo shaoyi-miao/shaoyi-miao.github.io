@@ -34,9 +34,11 @@ for(const node of document.querySelectorAll("[data-comments-topic]")){
   const button=form.querySelector("button[type=submit]");
   form.dataset.busy="1";button.disabled=true;msg.textContent="正在提交…";
   try{
-   const data=await call({action:"submit",topic,name:String(fields.get("name")||"").trim(),body,website:String(fields.get("website")||"")});
-   if(data.status!=="pending")throw Error("unavailable");
-   form.reset();msg.textContent="留言已提交，审核后显示。";
+   const data=await call({action:"submit_v2",topic,name:String(fields.get("name")||"").trim(),body,website:String(fields.get("website")||"")});
+   if(!["published","pending"].includes(data.status))throw Error("unavailable");
+   form.reset();
+   if(data.status==="published"){msg.textContent="留言已发表。";await load();}
+   else msg.textContent="留言已提交，审核后显示。";
   }catch(e){msg.textContent=e.message==="rate"?"留言过于频繁，请稍后再试。":"提交失败，请稍后重试。";}
   finally{form.dataset.busy="0";button.disabled=false;}
  });
