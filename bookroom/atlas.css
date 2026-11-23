@@ -9,3 +9,11 @@
 @media(max-width:800px){.atlas-scene{padding:19px 18px 15px}.atlas-panel{padding:22px}.atlas-book-links{grid-template-columns:1fr}.atlas-topic-head{display:block}.atlas-count{display:inline-block;margin:12px 0 0}.atlas-hero{padding:38px 0 21px}.atlas-hero p{font-size:14px}}
 @media(max-width:650px){.atlas-canvas{display:none}.atlas-label span{display:none}.atlas-scene{border-radius:26px;padding:20px}.atlas-mobile-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 6px}.atlas-mobile-tabs button{border-radius:20px;min-height:62px;border:1px solid #dbd5c9;color:#49463e;background:#fcf9f1;font:500 14px var(--ui);padding:11px 4px}.atlas-mobile-tabs button[aria-pressed="true"]{border-color:#829181;background:#e4e9df}.atlas-panel{border-radius:24px;padding:20px 16px}.atlas-topic-head h3{font-size:20px}.atlas-topic-head p{font-size:13px}.atlas-book{padding:11px 12px;gap:8px}.atlas-book-title{font-size:12px}.atlas-caveat{font-size:11px}.atlas-after{display:block;padding:10px 0 45px}.atlas-after p{margin-top:13px}.atlas-hero h1{font-size:30px}.atlas-view-more{width:100%;margin:7px 0}.card-grid{margin-bottom:35px}}
 @media(prefers-reduced-motion:reduce){.atlas-node circle,.atlas-book{transition:none!important}}
+
+/* Search can discover a book by its editorial topic, not just by literal title words. */
+.search-suggestions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:-6px 0 20px}
+.search-suggestions>span{font-size:12px;color:#6d675f;margin-right:2px}
+.search-topic-chip{cursor:pointer;border:1px solid #d9d0c4;background:#faf7f0;color:#4e574d;border-radius:99px;padding:7px 13px;font:inherit;font-size:12px;line-height:1.6}
+.search-topic-chip:hover,.search-topic-chip:focus-visible{background:#e6ebe2;border-color:#9cab99;outline-offset:2px}
+.search-scope-note{font-size:12px;color:#68645c;margin:23px 0 54px;line-height:1.9;max-width:770px}
+@media(max-width:650px){.search-suggestions{gap:7px}.search-suggestions>span{width:100%;margin-bottom:4px}.search-topic-chip{padding:7px 11px}}
