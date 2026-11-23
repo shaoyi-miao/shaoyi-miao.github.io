@@ -19,10 +19,10 @@ const bindings=[
 ];
 for(const [el,path,start] of bindings){
  count(path,start).then(value=>{
-   if(el.hasAttribute("data-view-count"))el.textContent="本篇浏览 "+value;
-   else el.textContent=value;
+   if(el.hasAttribute("data-view-count")){el.textContent="本篇阅读次数 "+value;el.style.removeProperty("display");}
+   else {el.textContent=value;const section=el.closest("[data-visit-section]");if(section&&[...section.querySelectorAll("strong")].every(x=>x.textContent.trim()))section.style.removeProperty("display");}
  }).catch(()=>{
-   el.textContent=el.hasAttribute("data-view-count")?"阅读统计暂不可用":"—";
+   el.style.display="none";
  });
 }
 })();
