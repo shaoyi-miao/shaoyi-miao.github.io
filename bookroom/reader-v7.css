@@ -22,7 +22,10 @@
 .paper-body.modern{font-family:'Noto Sans CJK SC','Noto Sans SC','Microsoft YaHei',sans-serif;line-height:1.9}
 .paper-body h2{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;font-size:1.2em;line-height:1.5;margin:0 0 24px;font-weight:600}
 .paper-body .epigraph{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;font-size:.75em;color:#716b60;margin:0 0 28px}
-.paper-body p{margin:0 0 1em;text-align:justify;text-justify:inter-ideograph;hyphens:auto}
+.paper-body p{margin:0 0 1em;text-align:justify;text-justify:inter-ideograph;hyphens:auto;text-indent:0}
+/* Chinese book typography: indent only actual paragraph starts, not fragments carried over a printed page. */
+.paper-body p.reader-paragraph-start{text-indent:2em}
+.paper-body p.reader-paragraph-continuation{text-indent:0}
 .paper-num{color:#7d7262;font-size:11px;text-align:right;flex:none;padding-top:12px}
 .reader-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:14px 8px;color:#524c44}
 .reader-foot button{padding:9px 16px;border:1px solid #d8cbba;background:#fbf5eb;border-radius:99px;font-size:13px;min-width:85px}
@@ -41,5 +44,11 @@
 .bookreader-shell.night .reader-foot{color:#ddd2bf}
 .bookreader-shell.night .paper-body .epigraph{color:#cbbca6}
 @media(max-width:1050px){.reader-flex{grid-template-columns:235px minmax(0,1fr)}.reader-spread{grid-template-columns:1fr}.reader-spread .paper.second{display:none}.paper{height:clamp(620px,calc(100svh - 225px),810px);padding:29px clamp(24px,5vw,80px)}}
-@media(max-width:820px){.bookreader-shell{padding:0 13px;margin:15px auto 35px}.reader-caption{border-radius:20px;padding:12px;gap:10px}.reader-caption-title{width:100%}.reader-toolbar{width:100%}.reader-toolbar button{flex:1 1 auto;padding:8px}.reader-flex{display:block}.reader-toc{display:none;min-height:0;margin-bottom:12px;border-radius:23px;padding:16px}.reader-flex.toc-open .reader-toc{display:block}.reader-spread{display:block}.paper{height:auto;min-height:500px;overflow:visible;border-radius:26px;padding:31px clamp(18px,5vw,28px)}.paper-body{overflow:visible}.paper-body p{text-align:left}.reader-foot{margin-top:10px}.bookreader-shell.night{border-radius:25px;padding:10px}.reader-notice{padding:7px 6px}}
+@media(max-width:820px){.bookreader-shell{padding:0 13px;margin:15px auto 35px}.reader-caption{border-radius:20px;padding:12px;gap:10px}.reader-caption-title{width:100%}.reader-toolbar{width:100%}.reader-toolbar button{flex:1 1 auto;padding:8px}.reader-flex{display:block}.reader-toc{display:none;min-height:0;margin-bottom:12px;border-radius:23px;padding:16px}.reader-flex.toc-open .reader-toc{display:block}.reader-spread{display:block}.paper{height:auto;min-height:500px;overflow:visible;border-radius:26px;padding:31px clamp(18px,5vw,28px)}.paper-body{overflow:visible}.paper-body p{text-align:justify;text-justify:inter-ideograph}.reader-foot{margin-top:10px}.bookreader-shell.night{border-radius:25px;padding:10px}.reader-notice{padding:7px 6px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Match comments to the reader's content column rather than centering against the whole viewport. */
+.reader-comments-layout{margin-top:0;margin-bottom:82px}
+.reader-comments-layout .reader-comments-rail{min-width:0}
+.reader-comments-layout .reader-comments{margin:0;width:auto;max-width:none;min-width:0}
+@media(max-width:820px){.reader-comments-layout{margin-top:0;margin-bottom:52px}.reader-comments-layout .reader-comments-rail{display:none}.reader-comments-layout .reader-comments{margin:0;padding:22px 18px}}

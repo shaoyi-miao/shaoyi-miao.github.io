@@ -11,7 +11,7 @@ let size=18,two=true,book=true,night=false,anchor=0,pages=[],pageIndex=0,kind='c
 function e(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 const isMobile=()=>matchMedia('(max-width: 820px)').matches;
 const canTwo=()=>window.innerWidth>1050;
-function partsHtml(parts){return parts.map(x=>'<p>'+e(paragraphs[x.i].slice(x.start,x.end).join(''))+'</p>').join('')}
+function partsHtml(parts){return parts.map(x=>'<p class="'+(x.start===0?'reader-paragraph-start':'reader-paragraph-continuation')+'">'+e(paragraphs[x.i].slice(x.start,x.end).join(''))+'</p>').join('')}
 function pageContent(p,number){const note=root.dataset.mode==='public-trial'?'免费公开试读 · 完整文章':root.dataset.mode==='private-trial'?'作者私有试读校样 · 未获公开许可':'此处仅展示排版测试文字，真实章节正文未公开。';const first=p.first?`<h2>${e(title)}</h2><div class="epigraph">${note}</div>`:'';
 return `<div class="paper-meta">${e(chapterId)} · ${root.dataset.mode==='public-trial'?'免费阅读':root.dataset.mode==='private-trial'?'私有审核':'阅读器内部预览'}</div><div class="paper-body ${book?'':'modern'}">${first}${partsHtml(p.parts)}</div><div class="paper-num">${number}</div>`}
 function calculate(){const measure=A,pg=[];let i=0,at=0;const position=()=>prefix[i]+at;let overflow=false;
