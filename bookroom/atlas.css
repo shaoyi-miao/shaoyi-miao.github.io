@@ -72,3 +72,12 @@
 @media(max-width:800px){.reader-comments{margin:24px 17px 60px;padding:22px;border-radius:23px}.home-stat-line>small{flex-basis:100%;margin-left:0}}
 @media(max-width:650px){.home-stat-line{gap:12px 22px}.reader-utilities{gap:8px;justify-content:space-between}.share-reading{margin-left:0}.reader-comments{margin:20px 12px 50px;padding:20px 16px}.reader-comments-head h2{font-size:21px}.reader-next-trials{font-size:11px}.guestbook{padding:36px 0 60px}}
 .reading-free-mark{display:inline-block;font-size:10px;font-weight:600;color:#58735f;background:#e7efe6;border:1px solid #c6d6c4;padding:2px 7px;border-radius:8px;margin-left:10px;vertical-align:2px}
+
+/* Open questions: two-column cards, independent of book-prefix grid. */
+.related-work-row.discussion-question{grid-template-columns:minmax(0,1fr) 24px;gap:20px;padding:19px 24px;align-items:center;min-height:0}
+.discussion-question .related-work-main{gap:7px}
+.discussion-question .related-work-main small:first-child{font-size:12px;letter-spacing:.03em;color:#65705f}
+.discussion-question .related-work-main strong{font-size:18px;line-height:1.5;font-weight:600;overflow-wrap:break-word}
+.discussion-question .related-work-main small:last-child{font-size:14px;line-height:1.65;overflow-wrap:break-word}
+.discussion-question .related-work-arrow{justify-self:end;font-size:17px}
+@media(max-width:600px){.related-work-row.discussion-question{grid-template-columns:minmax(0,1fr) 18px;gap:10px;padding:15px 16px}.discussion-question .related-work-main strong{font-size:16px}.discussion-question .related-work-main small:last-child{font-size:13px}}
