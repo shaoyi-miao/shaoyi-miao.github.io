@@ -7,6 +7,7 @@ async function call(payload){
  return data;
 }
 for(const node of document.querySelectorAll("[data-comments-topic]")){
+ const long=node.dataset.discussion==="1",limit=long?6000:1500;
  const topic=node.dataset.commentsTopic,list=node.querySelector("[data-comments-list]"),form=node.querySelector("form"),msg=node.querySelector("[data-comment-status]");
  if(!list||!form||!msg)continue;
  function status(s){list.replaceChildren();const p=document.createElement("p");p.className="comments-status";p.textContent=s;list.append(p)}
@@ -30,11 +31,11 @@ for(const node of document.querySelectorAll("[data-comments-topic]")){
  form.addEventListener("submit",async e=>{
   e.preventDefault();if(form.dataset.busy==="1")return;
   const fields=new FormData(form),body=String(fields.get("body")||"").trim();
-  if(!body||body.length>1500){msg.textContent="请输入1–1500字留言。";return;}
+  if(!body||body.length>limit){msg.textContent="请输入1–"+limit+"字。";return;}
   const button=form.querySelector("button[type=submit]");
   form.dataset.busy="1";button.disabled=true;msg.textContent="正在提交…";
   try{
-   const data=await call({action:"submit_v2",topic,name:String(fields.get("name")||"").trim(),body,website:String(fields.get("website")||"")});
+   const data=await call({action:long?"submit_discussion":"submit_v2",topic,name:String(fields.get("name")||"").trim(),body,website:String(fields.get("website")||"")});
    if(!["published","pending"].includes(data.status))throw Error("unavailable");
    form.reset();
    if(data.status==="published"){msg.textContent="留言已发表。";await load();}
