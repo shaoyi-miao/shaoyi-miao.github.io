@@ -13,8 +13,8 @@ const isMobile=()=>matchMedia('(max-width: 820px)').matches;
 const theory=root.dataset.theory==='true';
 const canTwo=()=>window.innerWidth>1050;
 function partsHtml(parts){return parts.map(x=>{const t=paragraphs[x.i].slice(x.start,x.end).join('');if(theory&&x.start===0&&(/^(卷1｜章[1-5]｜节|[1-5]\.\d+\.\d+\s)/.test(t)))return '<h3 style="text-indent:0;font-size:1.1em;margin:1.25em 0 .5em">'+e(t)+'</h3>';return '<p class="'+(x.start===0?'reader-paragraph-start':'reader-paragraph-continuation')+'">'+e(t)+'</p>'}).join('')}
-function pageContent(p,number){const note=root.dataset.mode==='public-trial'?(theory?'免费阅读 · 完整章节':'免费阅读 · 完整文章'):root.dataset.mode==='private-trial'?'作者私有试读校样 · 未获公开许可':'此处仅展示排版测试文字，真实章节正文未公开。';const first=p.first?`<h2>${e(title)}</h2><div class="epigraph">${note}</div>`:'';
-return `<div class="paper-meta">${e(chapterId)} · ${root.dataset.mode==='public-trial'?'免费阅读':root.dataset.mode==='private-trial'?'私有审核':'阅读器内部预览'}</div><div class="paper-body ${book?'':'modern'}">${first}${partsHtml(p.parts)}</div><div class="paper-num">${number}</div>`}
+function pageContent(p,number){const note=root.dataset.mode==='public-trial'?(theory?'完整章节':'完整文章'):root.dataset.mode==='private-trial'?'作者私有试读校样 · 未获公开许可':'此处仅展示排版测试文字，真实章节正文未公开。';const first=p.first?`<h2>${e(title)}</h2><div class="epigraph">${note}</div>`:'';
+return `<div class="paper-meta">${e(chapterId)} · ${root.dataset.mode==='public-trial'?'阅读':root.dataset.mode==='private-trial'?'私有审核':'阅读器内部预览'}</div><div class="paper-body ${book?'':'modern'}">${first}${partsHtml(p.parts)}</div><div class="paper-num">${number}</div>`}
 function calculate(){const measure=A,pg=[];let i=0,at=0;const position=()=>prefix[i]+at;let overflow=false;
 function fits(parts,first){measure.innerHTML=pageContent({parts,first},pg.length+1);const body=measure.querySelector('.paper-body');return body.scrollHeight<=body.clientHeight+1}
 while(i<paragraphs.length&&pg.length<250){const start=position(),parts=[],first=pg.length===0;
